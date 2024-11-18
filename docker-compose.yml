@@ -1,0 +1,25 @@
+version: '3.11'
+
+
+services:
+  bot:
+    build: .
+    restart: always
+    container_name: clothes_shop_con
+    depends_on:
+      - clothes
+
+
+  clothes:
+    image: postgres:alpine
+    restart: always
+    container_name: clothes_con
+    environment:
+      POSTGRES_PASSWORD: 1
+    ports:
+      - "5433:5432"
+    volumes:
+      - clothes_data:/var/lib/postgresql/data/
+
+volumes:
+  clothes_data:
