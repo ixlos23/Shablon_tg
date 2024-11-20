@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from sqlalchemy import BigInteger, VARCHAR, Column, DateTime, Float, Integer, ForeignKey
+from sqlalchemy import BigInteger, VARCHAR, Column, DateTime, Float, Integer, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, DeclarativeBase, declared_attr, relationship
 
 
@@ -34,13 +34,6 @@ class User(CreatedModel):
         return self.full_name
 
 
-class Category(CreatedModel):
-    __tablename__ = "categories" # noqa
-    name = mapped_column(VARCHAR(255), nullable=False)
-    products: Mapped[list['Product']] = relationship(back_populates="category")
-
-    def __repr__(self):
-        return self.name
 
 
 class Product(CreatedModel):
@@ -49,8 +42,6 @@ class Product(CreatedModel):
     price = mapped_column(Float, nullable=False)
     quantity = mapped_column(Integer, nullable=False)
     description = mapped_column(VARCHAR(255), nullable=True)
-    category_id = mapped_column(Integer, ForeignKey('categories.id'))
-    category: Mapped['Category'] = relationship(back_populates="products")
 
     def __repr__(self):
         return self.title

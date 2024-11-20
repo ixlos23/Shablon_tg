@@ -36,11 +36,3 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(main())
 
-'''
-git init
-git add .
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/ixlos23/Shablon_tg.git
-git push -u origin main
-'''

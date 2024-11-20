@@ -5,6 +5,7 @@ from aiogram.utils.i18n import gettext as _
 from sqlalchemy import select, insert
 from sqlalchemy.orm import Session
 
+from bot.buttons.reply import main_button
 from db.models import User
 
 main_router = Router()
@@ -21,5 +22,5 @@ async def command_start_handler(message: Message, session: Session) -> None:
         }
         session.execute(insert(User).values(**user))
         session.commit()
-    await message.answer(text="{} {}!".format(_('Hello'), message.from_user.full_name))
+    await message.answer(text="{} {}!".format(_('Hello'), message.from_user.full_name), reply_markup=main_button())
     await message.bot.set_my_commands(commands=[BotCommand(command='/start', description='Qayta ishga tushirish!')])

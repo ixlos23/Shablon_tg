@@ -3,16 +3,16 @@ from aiogram.utils.i18n import gettext as _
 from db.models import Product
 
 
-def caption_book(mushk: Product):
+def caption_book(fitchi: Product):
     caption = """
-{title}: {mushk_name}
-{description}: {mushk_description}
-{price}: {mushk_price}
+{title}: {fitchi_name}
+{description}: {fitchi_description}
+{price}: {fitchi_price}
     """.format(title=_("🔹 Title") ,
-               mushk_name=mushk.title,
+               fitchi_name=fitchi.title,
                description=_("📖 Description"),
-               mushk_description=mushk.description,
+               fitchi_description=fitchi.description,
                price=_("💸 Price"),
-               mushk_price=mushk.price,
+               fitchi_price=fitchi.price,
                )
     return caption # noqa
