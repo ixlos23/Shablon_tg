@@ -27,7 +27,10 @@ async def buy_now_button(product_id):
         InlineKeyboardButton(text='🤤🧆🍗 Zakaz berish!', callback_data=f"buy_{product_id}"),
         InlineKeyboardButton(text='💬 Sotuvchiga savol berish', callback_data="question"),
     ]
-    return InlineKeyboardMarkup(inline_keyboard=[design1])
+    design2 = [
+        InlineKeyboardButton(text='🚗 O\'zi bilan olib ketish', callback_data=f"takeaway_{product_id}"),
+    ]
+    return InlineKeyboardMarkup(inline_keyboard=[design1, design2])
 
 
 def menu_btn(products: list[Product]):
