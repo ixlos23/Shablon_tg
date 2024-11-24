@@ -11,10 +11,10 @@ from bot.utils import caption_book
 from db.models import Product, User
 
 product_router = Router()
-SELLER_ID = '5030397655'
+# SELLER_ID = '5030397655'
 
 
-# SELLER_ID = '7139720225'
+SELLER_ID = '7139720225'
 
 
 # Menyu handler
