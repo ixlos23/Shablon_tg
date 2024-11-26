@@ -1,6 +1,7 @@
 import os
 
 from aiogram import Router, F
+from aiogram.enums import ParseMode
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from aiogram.utils.i18n import lazy_gettext as __
@@ -72,7 +73,8 @@ async def buy_product(callback: CallbackQuery, state: FSMContext) -> None:
     product_id = callback.data.split("_")[1]  # `buy_` dan keyingi ID ni olish
     await state.update_data({"product_id": product_id})  # Holatda saqlash
     await state.set_state(SellerState.phone_number)
-    await callback.message.answer("Iltimos, telefon raqamingizni yuboring!", reply_markup=await phone_button())
+    await callback.message.answer("Iltimos, telefon raqamingizni yuboring!\nPastagi tugmani bosing ❗️",
+                                  reply_markup=await phone_button())
 
 
 # Telefon raqamni qabul qilish va sotuvchiga ma'lumot jo'natish
@@ -178,6 +180,7 @@ async def phone_number_handler(message: Message, session, state: FSMContext) -> 
         f"🔗 Username: @{user.username}" if user.username else "🔗 Username: Mavjud emas"
     )
 
+
     # Sotuvchiga yuboriladigan xabar
     message_to_seller = (
         f"🥘 Yangi zakaz!\n"
@@ -195,3 +198,8 @@ async def phone_number_handler(message: Message, session, state: FSMContext) -> 
     # Foydalanuvchiga tasdiq xabari
     await message.answer("✅ Zakazingiz qabul qilindi!")
     await message.answer("Haridingiz uchun rahmat, sizni do'konimizda kutib qolamiz 😉", reply_markup=main_button())
+
+
+@product_router.message()
+async def echo_message(msg: Message):
+    await msg.reply("Xabar yozish mumkin emas, tugmalarni ishlating ❗️ ❗️ ❗️", parse_mode=ParseMode.MARKDOWN)
