@@ -1,7 +1,10 @@
+import os
+
 from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from aiogram.utils.i18n import lazy_gettext as __
+from dotenv import load_dotenv
 from sqlalchemy.future import select
 from sqlalchemy.orm import Session
 
@@ -11,10 +14,10 @@ from bot.utils import caption_book
 from db.models import Product, User
 
 product_router = Router()
-# SELLER_ID = '5030397655'
+# SELLER_ID=
+load_dotenv('env')
 
-
-SELLER_ID = '7139720225'
+SELLER_ID = os.getenv('SELLER_ID')
 
 
 # Menyu handler
