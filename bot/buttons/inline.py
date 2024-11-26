@@ -42,6 +42,12 @@ def menu_btn(products: list[Product]):
     ikb.adjust(2, repeat=True)
     return ikb.as_markup()
 
+def admin_contact_button():
+    ikb = InlineKeyboardBuilder()
+    ikb.add(
+        InlineKeyboardButton(text="Do'kon egasi", url="t.me/+998885166777")
+    )
+    return ikb.as_markup()
 
 def counter_btn(counter: int) -> InlineKeyboardMarkup:
     """

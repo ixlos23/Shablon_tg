@@ -1,20 +1,23 @@
+import os
+
 from aiogram import Router, F
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from aiogram.utils.i18n import lazy_gettext as __
+from dotenv import load_dotenv
 from sqlalchemy.future import select
 from sqlalchemy.orm import Session
 
-from bot.buttons.inline import menu_btn, buy_now_button, counter_btn
+from bot.buttons.inline import menu_btn, buy_now_button, counter_btn, admin_contact_button
 from bot.buttons.reply import phone_button, SellerState, main_button
 from bot.utils import caption_book
-from db.models import Product, User
+from db.models import Product
 
 product_router = Router()
-# SELLER_ID = '5030397655'
+# SELLER_ID=
+load_dotenv('env')
 
-
-SELLER_ID = '7139720225'
+SELLER_ID = os.getenv('SELLER_ID')
 
 
 # Menyu handler
@@ -30,7 +33,7 @@ async def product_handler(callback: CallbackQuery, session, state: FSMContext) -
     if value.isdigit():  # Check if value is a valid number
         product_id = int(value)
         _product = session.execute(select(Product).where(Product.id == product_id)).scalar()
-        counter = 0
+        counter = 1
         await state.update_data(counter=counter)
         if _product:
             await callback.message.answer_photo(
@@ -122,12 +125,12 @@ async def phone_number_handler(message: Message, session, state: FSMContext) -> 
 
 @product_router.message(F.text == __('👤 Do\'kon egasi b-n bog\'lanish'))
 async def books_handler(message: Message, session: Session) -> None:
-    await message.answer("t.me/ixlos_o63\n+998932889274")
+    await message.answer(text="👇", reply_markup=admin_contact_button())
 
 
 @product_router.callback_query(F.data.startswith("question"))
 async def Seller_profile(callback: CallbackQuery, session) -> None:
-    await callback.message.answer("t.me/ixlos_o63\n+998932889274")
+    await callback.message.answer('👇', reply_markup=admin_contact_button())
 
 
 @product_router.callback_query(F.data.startswith("takeaway_"))
