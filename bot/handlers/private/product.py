@@ -192,6 +192,7 @@ async def phone_number_handler(message: Message, session, state: FSMContext) -> 
         f"❗️ ❗️ ❗️ САБОЙ ❗️ ❗️ ❗️"
     )
 
+
     # Sotuvchiga xabar yuborish
     await message.bot.send_message(chat_id=SELLER_ID, text=message_to_seller)
 
