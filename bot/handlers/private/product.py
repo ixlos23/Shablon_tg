@@ -180,8 +180,6 @@ async def phone_number_handler(message: Message, session, state: FSMContext) -> 
         f"🔗 Username: @{user.username}" if user.username else "🔗 Username: Mavjud emas"
     )
 
-
-    # Sotuvchiga yuboriladigan xabar
     message_to_seller = (
         f"🥘 Yangi zakaz!\n"
         f"🥗 Mahsulot: {_product.title}\n"
@@ -192,12 +190,8 @@ async def phone_number_handler(message: Message, session, state: FSMContext) -> 
         f"❗️ ❗️ ❗️ САБОЙ ❗️ ❗️ ❗️"
     )
 
-
-    # Sotuvchiga xabar yuborish
     await message.bot.send_message(chat_id=SELLER_ID, text=message_to_seller)
-
-    # Foydalanuvchiga tasdiq xabari
-    await message.answer("✅ Zakazingiz qabul qilindi!")
+    await message.answer("✅ Zakazingiz qabul qilindi!\nDastavka Xizmatimiz mavjud emas, Do'konimizda kutamiz")
     await message.answer("Haridingiz uchun rahmat, sizni do'konimizda kutib qolamiz 😉", reply_markup=main_button())
 
 
